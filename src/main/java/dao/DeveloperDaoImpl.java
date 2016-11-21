@@ -85,6 +85,7 @@ public class DeveloperDaoImpl implements DeveloperDao {
         }
     }
 
+    @SuppressWarnings("unchecked")
     public List<Developer> getDevelopersByProject(int id) throws SQLException {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
@@ -95,7 +96,7 @@ public class DeveloperDaoImpl implements DeveloperDao {
                 "join developer_project on dev_id = developer_id \n" +
                 "join projects on project_id = proj_id  \n" +
                 "where proj_id = :projectId;";
-        List<Developer> allDevelopersOnProject = session.createNativeQuery(sql).setParameter("projectId", id).list();
+        List<Developer> allDevelopersOnProject = (List<Developer>)session.createNativeQuery(sql).setParameter("projectId", id).list();
         logger.info("Reading all Developer: " + allDevelopersOnProject);
 //        for (Developer developer : allDevelopersOnProject) {
 //            ConsoleHelper.writeMessage(developer.toString());
@@ -120,6 +121,7 @@ public class DeveloperDaoImpl implements DeveloperDao {
     }
 
     //    new_2
+    @SuppressWarnings("unchecked")
     public void showAllDevelopers() {
         Session session = HibernateUtil.getSessionFactory().openSession();
         Collection<Developer> listDevelopers = session.createQuery("FROM Developer").list();
