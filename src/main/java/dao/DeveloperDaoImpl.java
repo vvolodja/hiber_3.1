@@ -87,12 +87,18 @@ public class DeveloperDaoImpl implements DeveloperDao {
 
     public List<Developer> getDevelopersByProject(int id) throws SQLException {
 
-        List<Developer> allDevelopersOnProject = new ArrayList<Developer>();
-
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
-        String hql = "from Developer as d join fetch d.projects as p where p.id = :projectId";
-        allDevelopersOnProject = session.createQuery(hql).setParameter("projectId", id).list();
+//        String hql = "from Developer as d join fetch d.projects as p where p.id = :projectId";
+//        allDevelopersOnProject = session.createQuery(hql).setParameter("projectId", id).list();
+        String sql = "select * from developers \n" +
+                "join developer_project on dev_id = developer_id \n" +
+                "join projects on project_id = proj_id  \n" +
+                "where proj_id = :projectId;";
+        List<Developer> allDevelopersOnProject = session.createNativeQuery(sql).setParameter("projectId", id).list();
+        logger.info("Reading all Developer: " + allDevelopersOnProject);
+//        for (Developer developer : allDevelopersOnProject) {
+//            ConsoleHelper.writeMessage(developer.toString());
         session.getTransaction().commit();
         session.close();
 
@@ -103,6 +109,7 @@ public class DeveloperDaoImpl implements DeveloperDao {
     public List<Developer> getAllDevelopersList() throws SQLException {
 
         Session session = HibernateUtil.getSessionFactory().openSession();
+
         session.beginTransaction();
         String hql = "from Developer";
         List<Developer> allDevelopersList = session.createQuery(hql).list();
