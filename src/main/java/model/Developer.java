@@ -113,20 +113,44 @@ public class Developer {
         return result;
     }
 
+//    version 1
+
+//    @Override
+//    public String toString() {
+//        String projectsList = "";
+//        if (projects != null) {
+//            for (Project project : projects) {
+//                projectsList += "   ID проекта: " + project.getId() + "\n" +
+//                        "   Название проекта: " + project.getName() + "\n";
+//            }
+//        }
+//        return "-----------------------------------------------------------------------------------------------" + "\n" +
+//                "Данные разработчика:" + "\n" +
+//                "ID: " + id + "\n" +
+//                "Имя: " + name + "\n" +
+//                "Зарплата: " + salary + "\n" +
+//                "Информация о проекте: " + "\n" + projectsList;
+//    }
+
+//    version 2
+
     @Override
     public String toString() {
-            String projectsList = "";
-            if(projects != null) {
-                for (Project project : projects) {
-                    projectsList += "   ID проекта: " + project.getId() + "\n" +
-                            "   Название проекта: " + project.getName() + "\n";
-                }
-            }
-            return "-----------------------------------------------------------------------------------------------" + "\n" +
-                    "Данные разработчика:" + "\n" +
-                    "ID: " + id + "\n" +
-                    "Имя: " + name + "\n" +
-                    "Зарплата: " + salary + "\n" +
-                    "Информация о проекте: " + "\n" + projectsList;
+        return "-----------------------------------------------------------------------------------------------" + "\n" +
+                "Данные разработчика:" + "\n" +
+                "ID: " + id + "\n" +
+                "Имя: " + name + "\n" +
+                "Зарплата: " + salary + "\n" +
+                "Информация о проекте: " + "\n" + projectsListToString(projects);
+    }
+
+    public String projectsListToString(Collection<Project> projects) {
+
+        String projectsList = "";
+        for (Project project : projects) {
+            projectsList += "   ID проекта: " + project.getId() + "\n" +
+                    "   Название проекта: " + project.getName() + "\n";
+        }
+        return projectsList;
     }
 }

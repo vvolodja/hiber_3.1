@@ -92,21 +92,47 @@ public class Project {
         return result;
     }
 
+//    version 1
+
+//    @Override
+//    public String toString() {
+//
+//            String developersOnProject = "";
+//            if(projectTeam != null) {
+//                for (Developer teamMember : projectTeam) {
+//                    developersOnProject += "    ID разработчика: " + teamMember.getId() + "\n" +
+//                    "   Имя разработчика: " + teamMember.getName() + "\n" +
+//                    "   Зарплата разработчика: " +  teamMember.getSalary() + "\n";
+//                }
+//            }
+//            return  "-----------------------------------------------------------------------------------------------" + "\n" +
+//                    "Информация о проекте: " + "\n" +
+//                    "ID проекта: " + id + "; " + "\n" +
+//                    "Название проекта: " + name + "\n" +
+//                    "Проектная команда: " + "\n" + developersOnProject;
+//    }
+
+
+//    version 2
+
     @Override
     public String toString() {
 
-            String developersOnProject = "";
-            if(projectTeam != null) {
-                for (Developer teamMember : projectTeam) {
-                    developersOnProject += "    ID разработчика: " + teamMember.getId() + "\n" +
-                    "   Имя разработчика: " + teamMember.getName() + "\n" +
-                    "   Зарплата разработчика: " +  teamMember.getSalary() + "\n";
-                }
-            }
             return  "-----------------------------------------------------------------------------------------------" + "\n" +
                     "Информация о проекте: " + "\n" +
                     "ID проекта: " + id + "; " + "\n" +
                     "Название проекта: " + name + "\n" +
-                    "Проектная команда: " + "\n" + developersOnProject;
+                    "Проектная команда: " + "\n" + developersListToString(projectTeam);
+    }
+
+    public String developersListToString(Collection<Developer> developers) {
+
+        String developersList = "";
+            for (Developer teamMember : developers) {
+                developersList += "    ID разработчика: " + teamMember.getId() + "\n" +
+                        "   Имя разработчика: " + teamMember.getName() + "\n" +
+                        "   Зарплата разработчика: " +  teamMember.getSalary() + "\n";
+            }
+        return developersList;
     }
 }
