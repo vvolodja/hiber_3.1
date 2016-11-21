@@ -5,9 +5,6 @@ import model.Project;
 import java.sql.SQLException;
 import java.util.List;
 
-/**
- * Created by vladimir on 17/11/16.
- */
 public interface ProjectDao {
 
 

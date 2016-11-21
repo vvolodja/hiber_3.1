@@ -39,7 +39,6 @@ public class DeveloperDaoImpl implements DeveloperDao {
         session.getTransaction().commit();
         showDeveloper(developer.getId());
         logger.info("Update Developer: " + developer.getName());
-
         session.close();
     }
 
@@ -62,6 +61,7 @@ public class DeveloperDaoImpl implements DeveloperDao {
         Session session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         developer = session.get(Developer.class, id);
+        ConsoleHelper.writeMessage(developer.toString());
         session.getTransaction().commit();
         session.close();
 
@@ -112,8 +112,8 @@ public class DeveloperDaoImpl implements DeveloperDao {
         Session session = HibernateUtil.getSessionFactory().openSession();
 
         session.beginTransaction();
-        String hql = "from Developer";
-        List<Developer> allDevelopersList = session.createQuery(hql).list();
+        String sql = "select * from developers";
+        List<Developer> allDevelopersList = session.createNativeQuery(sql).list();
         session.getTransaction().commit();
         session.close();
 
@@ -124,7 +124,8 @@ public class DeveloperDaoImpl implements DeveloperDao {
     @SuppressWarnings("unchecked")
     public void showAllDevelopers() {
         Session session = HibernateUtil.getSessionFactory().openSession();
-        Collection<Developer> listDevelopers = session.createQuery("FROM Developer").list();
+        String sql = "select * from developers";
+        Collection<Developer> listDevelopers = session.createNativeQuery(sql).list();
         logger.info("Reading all Developer: " + listDevelopers);
         for (Developer developer : listDevelopers) {
             ConsoleHelper.writeMessage(developer.toString());
