@@ -1,6 +1,7 @@
 package model;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 
 
@@ -11,7 +12,7 @@ public class Developer {
 //    Properties
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "dev_id")
     private int id;
 
@@ -21,12 +22,14 @@ public class Developer {
     @Column(name = "dev_salary")
     private int salary;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinTable(name = "developer_project",
-            joinColumns = @JoinColumn(name = "developer_id"),
-            inverseJoinColumns = @JoinColumn(name = "project_id")
+            joinColumns = @JoinColumn(name = "developer_id",
+            referencedColumnName = "dev_id"),
+            inverseJoinColumns = @JoinColumn(name = "project_id",
+            referencedColumnName = "proj_id")
     )
-    private Collection<Project> projects;
+    private Collection<Project> projects = new ArrayList<Project>();
 
 //    Constructors
 
