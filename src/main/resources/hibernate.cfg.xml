@@ -15,7 +15,7 @@
 
         <!-- Database connection settings -->
         <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-        <property name="connection.url">jdbc:mysql://localhost:3306/hiber_3</property>
+        <property name="connection.url">jdbc:mysql://localhost:3306/hiber_3?useSSL=false</property>
 
         <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 
@@ -29,6 +29,8 @@
 
         <!-- SQL dialect -->
         <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.current_session_context_class">thread</property>
+
 
         <!-- Disable the second-level cache  -->
         <!--<property name="cache.provider_class">org.hibernate.cache.internal.NoCachingRegionFactory</property>-->

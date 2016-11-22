@@ -85,6 +85,7 @@ public class MenuSet {
 
         List<Developer> list;
         list = daoDev.getAllDevelopersList();
+//        daoDev.showAllDevelopers();
         return list.toString();
     }
 

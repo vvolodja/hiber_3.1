@@ -38,7 +38,7 @@ public class HibernateUtil {
         try {
             // Create the ServiceRegistry from hibernate.cfg.xml
             ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()//
-                    .configure("hibernate.cfg.xml").build();
+                    .configure().build();
 
             // Create a metadata sources using the specified service registry.
             Metadata metadata = new MetadataSources(serviceRegistry).getMetadataBuilder().build();

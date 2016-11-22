@@ -22,7 +22,7 @@ public class Developer {
     @Column(name = "dev_salary")
     private int salary;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "developer_project",
             joinColumns = @JoinColumn(name = "developer_id",
             referencedColumnName = "dev_id"),
